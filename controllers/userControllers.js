@@ -32,19 +32,21 @@ export const login = async (req, res, next) => {
       if (check) {
         const token = jwt.sign({ _id: foundUser._id }, process.env.SECRET_KEY, {
           issuer: "Naqvi",
-          expiresIn: "24h"}
-        );
+          expiresIn: "24h",
+        });
         console.log(token);
         // Use the SECRECT_KEY to verify
-        res.header("token", token).send({success:true, data: foundUser}); // sending token to the header
+        res.header("token", token).send({ success: true, data: foundUser }); // sending token to the header
         /*  res.cookie("token", token).send({msg: "welcome back", foundUser}); // sending token to the cookie
          res.send({msg: "welcome back", foundUser, token}); */ // sending token to the body
       } else {
-        res.status(401).send({success:false, message:"password doesn't match!"});
+        res
+          .status(401)
+          .send({ success: false, message: "password doesn't match!" });
       }
     } else {
       // if there is no user found, then send this response
-      res.send({success:false, message:"Make sure your email is correct!"});
+      res.send({ success: false, message: "Make sure your email is correct!" });
     }
   } catch (error) {
     next(error);
@@ -64,10 +66,10 @@ export const register = async (req, res, next) => {
 
     const newUser = await User.create({
       ...req.body,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
-    res.status(200).send(newUser);
+    res.status(200).json(newUser);
   } catch (error) {
     next(error);
   }
@@ -77,7 +79,7 @@ export const register = async (req, res, next) => {
 export const updateUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true
+      new: true,
     });
 
     res.status(203).send(user);

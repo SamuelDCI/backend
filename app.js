@@ -18,6 +18,7 @@ app.use(express.json());
 // connecting to mongoDB through mongoose
 mongoose
   .connect("mongodb+srv://samuel:Eg2I02wyuH70cdQO@cluster0.zb1nuvc.mongodb.net/RecordShop")
+  // mongodb+srv://samuel:Eg2I02wyuH70cdQO@cluster0.zb1nuvc.mongodb.net/
   .then(() => console.log("We connected to DB 😉"))
   .catch((err) => console.log(err));
 
