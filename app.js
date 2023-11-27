@@ -26,7 +26,7 @@ app.use(morgan("tiny"));
 
 
 // cors middleware
-app.use(cors({origin:"http://localhost:5173", exposedHeaders:["token"]}))
+app.use(cors({origin:["http://localhost:5173" , "https://front-record.onrender.com"], exposedHeaders:["token"]}))
 
 // the routers (like middleware , to handle the request and send them to specific route )
 // localhost:8000/api/users
